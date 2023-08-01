@@ -1,0 +1,19 @@
+.authInput {
+  margin-bottom: 7px;
+  padding: 7px;
+  border: 1px solid transparent;
+  border-image: linear-gradient(-45deg, #FFA63D, #FF3D77, #338AFF, #3CF0C5);
+  border-image-slice: 1;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.authForm {
+  display: inline-block;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+}
+

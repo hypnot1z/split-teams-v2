@@ -1,0 +1,36 @@
+
+.item {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  border: 1px solid transparent;
+  border-image: linear-gradient(-45deg, #FFA63D, #FF3D77, #338AFF, #3CF0C5);
+  border-image-slice: 1;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: #007efc75;
+}
+
+.btnContainerRight {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.btnContainerRightTop {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+}
+.btnContainerLeft {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}

@@ -1,0 +1,89 @@
+@keyframes anime {
+  0%
+    {background-position: 0% 50%}
+  50%
+    {background-position: 100% 50%}
+  100%
+    {background-position: 0% 50%}
+}
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(0.95);
+  }
+}
+
+.rounded {
+  height: 45px;
+    width: 45px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 20px;
+    outline: none;
+    transition: transform 0.2s;
+
+  
+    &:hover {
+      transform: scale(0.95);
+    }
+}
+
+.gblue {
+  background: linear-gradient(-45deg, #81d61f, #42c422, #338AFF, #3CF0C5);
+  background-size: 600%;
+    animation: anime 16s linear infinite;
+}
+.gred {
+  background: linear-gradient(-45deg, #FFA63D, #FF3D77, #f0380a, #9a15d8);
+  background-size: 600%;
+    animation: anime 16s linear infinite;
+}
+
+.red {
+  color: red
+}
+.blue {
+  color:rgb(50, 146, 236);
+}
+.white {
+  color: white;
+}
+
+.bnone {
+  border: none
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid rgb(50, 146, 236);
+  border-radius: .3em;
+  }
+
+.contain {
+  width: 100%;
+    padding: 10px 40px 10px 40px;
+    background-color: rgb(50, 146, 236);
+    border: 1px solid rgb(50, 146, 236);
+    border-radius: .3em;
+    color: white;
+  }
+
+  .disabled {
+    height: 45px;
+    width: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: not-allowed;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    background-image: linear-gradient(45deg, #9e9fa0, #ebb6ca);
+  }
