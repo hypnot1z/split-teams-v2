@@ -1,9 +1,14 @@
 import * as React from 'react';
+import { FC } from 'react'
 import cn from './style.module.scss';
-import data from '../../api/db';
 import type Player from '../../interfaces/Player';
 
-const Item = ({ toggle, state }) => {
+interface ItemProps {
+  toggle: (arg: string) => void
+  state: Player[]
+}
+
+const Item: FC<ItemProps> = ({ toggle, state }) => {
   const players = (players: Player[]) => {
     return players.map((player) => (
       <li

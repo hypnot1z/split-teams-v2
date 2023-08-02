@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, FC } from 'react'
+import type Player from '../../interfaces/Player'
 import cn from './style.module.scss';
 import distributePlayers from '../../core'
 
@@ -13,19 +14,26 @@ enum ColorCode {
   Orange = '#FFA500',
 }
 
-const Result = ({selectedPlayers, refresh}) => {
-  const [result, setResult] = useState({teams: [], teamsRank: [], teamsAverageRank: [], roundedAverageRanks: [] })
-  useEffect(() => {
+interface ResultProps {
+  selectedPlayers: Player[]
+  qntTeams: number | null
+  refresh: boolean
+}
 
-    const teams = distributePlayers(selectedPlayers)
+const Result: FC<ResultProps> = ({selectedPlayers, qntTeams, refresh}) => {
+  const [result, setResult] = useState({teams: [], teamsRank: [], teamsAverageRank: [], roundedAverageRanks: [] })
+
+  useEffect(() => {
+    const teams = qntTeams ? distributePlayers(selectedPlayers, qntTeams) : distributePlayers(selectedPlayers)
     const teamsRank = teams.map(team => team.reduce((sum, player) => sum + player.rank, 0))
     const teamsAverageRank = teams.map(team => (team.reduce((sum, player) => sum + player.rank, 0) / team.length))
     const roundedAverageRanks = teamsAverageRank.map(rank => Math.round(rank)) 
     setResult({teams, teamsRank, teamsAverageRank, roundedAverageRanks})
   }, [refresh])
+  
   return (
     <div id='result'>
-    {result.teams.map((team, index) => (
+    {result.teams.map((team: Player[], index: number) => (
       <li style={{color: ColorCode[Color[index]]}} key={index}><div> Команда {Color[index]}</div> <div>Рейтинг общий : {result.teamsRank[index]} средний : {result.roundedAverageRanks[index]}</div>
       <ul>
         {team.map(player => (

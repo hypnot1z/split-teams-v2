@@ -4,7 +4,7 @@ import { useState } from 'react';
 import cn from './style.module.scss';
 import type Player from '../../interfaces/Player';
 import data from '../../api/db';
-import Button from '../../UI/Button'
+import Button from '../../components/UI/Button'
 import { FiTrash2 } from 'react-icons/fi'
 
 const EditTable = () => {

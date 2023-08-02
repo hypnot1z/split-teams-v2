@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
 import cn from './style.module.scss';
-import Button from '../../UI/Button'
+import Button from '../../components/UI/Button'
 
 const Auth = () => {
   const [username, setUsername] = useState('');
