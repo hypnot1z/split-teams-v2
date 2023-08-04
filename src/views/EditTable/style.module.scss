@@ -4,11 +4,16 @@
   border-collapse: collapse;
   display: table;
 
-   td {
-    border: 1px solid rgba(128, 128, 128, 0.37);
-  
+  //  td {
+  //   border: 1px solid rgba(128, 128, 128, 0.37);
+  // }
+  tbody tr:nth-child(even) {
+    background-color: #eaeff7; /* Чередующийся цвет фона рядов */
   }
-
+  tbody td {
+    vertical-align: middle;
+    padding: 10px;
+  }
 }
 
 .inputTable {
@@ -18,5 +23,30 @@
 }
 
 .rank {
-  width: 40px;
+  // width: 40px;
+  // padding: 5px;
+}
+
+.btnTable {
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    scale: 1.3;
+  }
+}
+.btnRed {
+  &:hover {
+    color: rgb(255, 0, 34)
+  }
+}
+.btnGreen {
+  &:hover {
+    color: rgb(1, 219, 1);
+  }
+}
+.btnBlue {
+  &:hover {
+    color: rgb(1, 88, 219);
+  }
 }
