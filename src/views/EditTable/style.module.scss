@@ -14,12 +14,35 @@
     vertical-align: middle;
     padding: 10px;
   }
+
+  .name {
+    width: 150px;
+
+    .inputName {
+      width: 150px;
+      margin: 0;
+      border: none;
+      color: rgb(109, 108, 108);
+      font-style: italic;
+      background-color: transparent;
+
+      &:focus {
+    outline: none;
+  }
+    }
+  }
 }
 
 .inputTable {
-  border: none;
-  text-align: center;
-  padding: 4px;
+  // border: none;
+  outline: 1px solid;
+  width: 150px;
+
+  // &:focus {
+  //   outline: none;
+  // }
+  // text-align: center;
+  // padding: 4px;
 }
 
 .rank {

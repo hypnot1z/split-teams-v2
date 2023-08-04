@@ -1,17 +1,20 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import cn from './style.module.scss';
 import type Player from '../../interfaces/Player';
 import data from '../../api/db';
 import Button from '../../components/UI/Button'
-import { FiTrash2, FiEdit, FiChevronDown, FiChevronUp, FiChevronsDown, FiChevronsUp } from 'react-icons/fi'
+import { FiTrash2, FiEdit, FiChevronDown, FiChevronUp, FiChevronsDown, FiChevronsUp, FiCheckCircle } from 'react-icons/fi'
 
 const EditTable = () => {
   const [editedData, setEditedData] = useState<Player[]>(data);
+  const [editPlayerId, setEditPlayerId] = useState<string | null>(null)
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleNameChange = (id: string, value: string) => {
-    setEditedData((prevData) =>
+    setEditedData((prevData: Player[]) =>
       prevData.map((item) =>
         item.id === id ? { ...item, name: value } : item
       )
@@ -19,7 +22,7 @@ const EditTable = () => {
   };
 
   const handleLastNameChange = (id: string, value: string) => {
-    setEditedData((prevData) =>
+    setEditedData((prevData: Player[]) =>
       prevData.map((item) =>
         item.id === id ? { ...item, lastName: value } : item
       )
@@ -27,7 +30,7 @@ const EditTable = () => {
   };
 
   const handleRankChange = (id: string, value: number) => {
-    setEditedData((prevData) =>
+    setEditedData((prevData: Player[]) =>
     prevData.map((item) => 
         item.id === id ? { ...item, rank: item.rank + value } : item
     )
@@ -36,9 +39,20 @@ const EditTable = () => {
   };
 
   const handleDeletePlayer = (id: string) => {
-    setEditedData((prevData) => prevData.filter((player) => player.id !== id));
+    setEditedData((prevData: Player[]) => prevData.filter((player) => player.id !== id));
     //todo Удаление из базы
   };
+
+  const handleToggleEdit = (id: string) => {
+    if (id === editPlayerId) {
+      setEditPlayerId(null)
+    } else {
+      setEditPlayerId(id)
+      // inputRef.current.focus();
+      
+    }
+    // console.log(inputRef.current[id])
+  }
 
   const isNameValid = (value: string) => /^[А-Яа-я]{1,30}$/.test(value);
 
@@ -53,26 +67,26 @@ const EditTable = () => {
         </nav>
     <table className={cn.playersTable}>
       <tbody>
-        {editedData.map((item) => (
-          <tr key={item.id}>
-            <td>
-              {item.name}
+        {editedData.map((player: Player) => (
+          <tr key={player.id}>
+            <td className={cn.name}>
+              {player.id === editPlayerId ? <input className={cn.inputName} type='text' value={player.name} ref={inputRef}></input> : player.name}
             </td>
             <td>
-              {item.lastName}
+              {player.lastName}
             </td>
             <td>
-              <button className={`${cn.btnTable} ${cn.btnRed}`} onClick={() => handleRankChange(item.id, -2)}><FiChevronsDown/></button>
-              <button className={`${cn.btnTable} ${cn.btnRed}`} onClick={() => handleRankChange(item.id, -1)}><FiChevronDown/></button>
-              {item.rank}
-              <button className={`${cn.btnTable} ${cn.btnGreen}`} onClick={() => handleRankChange(item.id, 1)}><FiChevronUp/></button>
-              <button className={`${cn.btnTable} ${cn.btnGreen}`} onClick={() => handleRankChange(item.id, 2)}><FiChevronsUp/></button>
+              <button className={`${cn.btnTable} ${cn.btnRed}`} onClick={() => handleRankChange(player.id, -2)}><FiChevronsDown/></button>
+              <button className={`${cn.btnTable} ${cn.btnRed}`} onClick={() => handleRankChange(player.id, -1)}><FiChevronDown/></button>
+              {player.rank}
+              <button className={`${cn.btnTable} ${cn.btnGreen}`} onClick={() => handleRankChange(player.id, 1)}><FiChevronUp/></button>
+              <button className={`${cn.btnTable} ${cn.btnGreen}`} onClick={() => handleRankChange(player.id, 2)}><FiChevronsUp/></button>
               </td>
               <td>
-              <button className={`${cn.btnTable} ${cn.btnRed}`} onClick={() => handleDeletePlayer(item.id)}><FiTrash2/></button>
+              <button className={`${cn.btnTable} ${cn.btnRed}`} onClick={() => handleDeletePlayer(player.id)}><FiTrash2/></button>
               </td>
               <td>
-              <button className={`${cn.btnTable} ${cn.btnBlue}`}><FiEdit/></button>
+              <button className={`${cn.btnTable} ${cn.btnBlue}`} onClick={() => handleToggleEdit(player.id)}>{!editPlayerId ? <FiEdit/> : <FiCheckCircle/>}</button>
               </td>
           </tr>
         ))}
