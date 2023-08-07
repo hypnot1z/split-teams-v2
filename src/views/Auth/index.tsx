@@ -23,27 +23,31 @@ const Auth = () => {
     <nav>
       <Link to='/'><Button>Назад</Button></Link>
       </nav>
-      <form className={cn.authForm} onSubmit={handleLogin}>
+      <div className={cn.authForm}>
+
+      <form onSubmit={handleLogin}>
       <div>
         <input
         className={cn.authInput}
-          type="text"
-          value={username}
-          placeholder='Логин'
-          onChange={(e) => setUsername(e.target.value)}
+        type="text"
+        value={username}
+        placeholder='Логин'
+        onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>
         <input
         className={cn.authInput}
-          type="password"
-          value={password}
-          placeholder='Пароль'
-          onChange={(e) => setPassword(e.target.value)}
+        type="password"
+        value={password}
+        placeholder='Пароль'
+        onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <Button type="submit" variant='contain'>Войти</Button>      
     </form>
+    <Link to='/' className={cn.link}>Регистрация</Link>
+        </div>
     </>
   )
 }

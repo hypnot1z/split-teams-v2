@@ -87,6 +87,12 @@ const db = [
   { name: 'ЭДУАРД', lastName: 'ОГАННИСЯН', rank: 75 },
   { name: 'ДЭМИС', lastName: 'КАКАБИДИС', rank: 26 },
 ];
-const data: Player[] = db.map((obj) => ({ ...obj, id: nanoid(4) }));
-// console.log(data.find(el => el.name === 'СЕМЕН'));
+// const data: Player[] = db.map((obj) => ({ ...obj, id: nanoid(4) }));
+
+function addWinsAndId(data: Player[]): Player[] {
+  return data.map((obj) => ({ ...obj, wins: Math.floor(Math.random() * 100), id: nanoid(4) }))
+}
+
+const data = addWinsAndId(db)
+
 export default data;
