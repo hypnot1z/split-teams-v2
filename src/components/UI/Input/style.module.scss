@@ -1,0 +1,23 @@
+
+.gradient, .grey {
+  &:focus {
+    outline: none;
+  }
+}
+
+.gradient {
+  margin-bottom: 7px;
+  padding: 7px;
+  border: 1px solid transparent;
+  border-image: linear-gradient(-45deg, #FFA63D, #FF3D77, #338AFF, #3CF0C5);
+  border-image-slice: 1;
+}
+
+.grey {
+  width: 150px;
+  margin: 0;
+  border: none;
+  color: rgb(109, 108, 108);
+  font-style: italic;
+  background-color: transparent;
+}
