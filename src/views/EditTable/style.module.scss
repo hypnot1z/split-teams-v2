@@ -1,6 +1,6 @@
 .playersTable {
   align-self: center;
-  width: fit-content;
+  min-width: 600px;
   border-collapse: collapse;
   display: table;
 
@@ -17,21 +17,36 @@
 
   .name {
     width: 150px;
-
-    .inputName {
-      width: 150px;
-      margin: 0;
-      border: none;
-      color: rgb(109, 108, 108);
-      font-style: italic;
-      background-color: transparent;
-
-      &:focus {
-    outline: none;
   }
+
+  .inputName {
+    max-width: 125px;
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid;
+    color: rgb(109, 108, 108);
+    font-style: italic;
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  .inputRank {
+    max-width: 20px;
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid;
+    color: rgb(109, 108, 108);
+    font-style: italic;
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
     }
   }
 }
+
 
 .inputTable {
   // border: none;
