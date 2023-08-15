@@ -1,0 +1,14 @@
+$LightBlue: rgb(50, 146, 236);
+
+.navButton {
+  background-color: transparent;
+  border: 1px solid $LightBlue;
+  border-radius: .3em;
+  color: $LightBlue;
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(0.95);
+  }
+}
