@@ -7,7 +7,7 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 interface RankBlockProps {
   playerId: string
-  isShow: string | null
+  isShow: boolean
   setEditedData: (any) => void
 }
 
@@ -33,11 +33,11 @@ const RankBlock: FC<PropsWithChildren<RankBlockProps>> = ({ children, playerId, 
       {/* <TableButton variant='doubledown' onClick={() => handleRankChange(playerId, -2)}/>
       <TableButton variant='down' onClick={() => handleRankChange(playerId, -1)}/> */}
       {/* {isShow ? `${down} ${children} ${up}` : {children}} */}
-      {!isShow ? down : null}
+      {isShow ? down : null}
 
       {children}
 
-      {!isShow ? up : null}
+      {isShow ? up : null}
       {/* <TableButton variant='up' onClick={() => handleRankChange(playerId, 1)}/>
       <TableButton variant='doubleup' onClick={() => handleRankChange(playerId, 2)}/> */}
     </div>

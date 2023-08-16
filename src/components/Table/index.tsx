@@ -9,37 +9,60 @@ interface TableProps {
   data: Player[]
 }
 
+enum SortDirection {
+  ASCENDING = 'asc',
+  DESCENDING = 'desc',
+}
+
 const Table: FC<TableProps> = ({ data }) => {
   const [editedData, setEditedData] = useState<Player[]>(data);
   const [editPlayerId, setEditPlayerId] = useState<string | null>(null)
-  const [sortedData, setSortedData] = useState<Player[]>(data);
+  const [sortedField, setSortedField] = useState<keyof Player | null>(null);
+  const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.ASCENDING)
 
   const sortData = (field: keyof Player) => {
+    const newSortDirection =
+      field === sortedField && sortDirection === SortDirection.ASCENDING
+        ? SortDirection.DESCENDING
+        : SortDirection.ASCENDING;
+
     const sorted = [...editedData].sort((a, b) => {
-      if (a[field] < b[field]) return -1;
-      if (a[field] > b[field]) return 1;
-      return 0;
+      const comparison = a[field] < b[field] ? -1 : a[field] > b[field] ? 1 : 0;
+      return newSortDirection === SortDirection.ASCENDING ? comparison : -comparison;
     });
+
     setEditedData(sorted);
+    setSortDirection(newSortDirection);
+    setSortedField(field);
   };
 
-  const handleNameChange = (id: string, value: string) => {
-    setEditedData((prevData: Player[]) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, name: value } : item
-      )
-    );
-  };
+  // const handleNameChange = (id: string, value: string) => {
+  //   setEditedData((prevData: Player[]) =>
+  //     prevData.map((item) =>
+  //       item.id === id ? { ...item, name: value } : item
+  //     )
+  //   );
+  // };
 
-  const handleLastNameChange = (id: string, value: string) => {
-    setEditedData((prevData: Player[]) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, lastName: value } : item
-      )
-    );
-  };
+  // const handleLastNameChange = (id: string, value: string) => {
+  //   setEditedData((prevData: Player[]) =>
+  //     prevData.map((item) =>
+  //       item.id === id ? { ...item, lastName: value } : item
+  //     )
+  //   );
+  // };
 
+  // const handleRankChange = (id: string, value: number) => {
+  //   setEditedData((prevData: Player[]) =>
+  //     prevData.map((item) =>
+  //       item.id === id ? { ...item, rank: value } : item
+  //     )
+  //   );
+  // }
 
+  const handleFieldChange = (id: string, value: string | number, name: string) => {
+    console.log('id : ', id, 'value : ', value, 'name : ', name)
+  }
 
   const handleDeletePlayer = (id: string) => {
     setEditedData((prevData: Player[]) => prevData.filter((player) => player.id !== id));
@@ -48,7 +71,7 @@ const Table: FC<TableProps> = ({ data }) => {
 
   const handleToggleEdit = (id: string) => {
     if (id === editPlayerId) {
-      setEditPlayerId(null)
+      setEditPlayerId(null);
     } else {
       setEditPlayerId(id)
     }
@@ -58,14 +81,13 @@ const Table: FC<TableProps> = ({ data }) => {
 
 // const isRankValid = (value: number) => /^[0-9]{3}$/.test(value);
 
-
   return (
     <table className={cn.playersTable}>
       <thead>
         <tr>
-          <th onClick={() => sortData('name')}>Имя</th>
-          <th onClick={() => sortData('lastName')}>Фамилия</th>
-          <th onClick={() => sortData('rank')}>Рейтинг</th>
+          <th className={cn.nameCol} onClick={() => sortData('name')}>Имя</th>
+          <th className={cn.nameCol} onClick={() => sortData('lastName')}>Фамилия</th>
+          <th className={cn.rankCol} onClick={() => sortData('rank')}>Рейтинг</th>
         </tr>
       </thead>
       <tbody>
@@ -80,15 +102,17 @@ const Table: FC<TableProps> = ({ data }) => {
             </td>
 
             <td>
-              <RankBlock playerId={player.id} setEditedData={setEditedData} isShow={editPlayerId}>
+              <RankBlock playerId={player.id} setEditedData={setEditedData} isShow={player.id === editPlayerId}>
               {player.id === editPlayerId 
-              ? <input className={cn.inputRank} type='text' placeholder={player.rank.toString()}></input> 
+              ? <input className={cn.inputRank} type='text' placeholder={player.rank.toString()} onChange={(e) => handleFieldChange(player.id, e.target.value, 'rank')}></input> 
               : player.rank}
               </RankBlock>
             </td>
 
-            <td>
-              <TableButton variant='delete' onClick={() => handleDeletePlayer(player.id)}/>
+            <td >
+              <div className={player.id === editPlayerId ? '' : cn.none}>
+              <TableButton  variant='delete' onClick={() => handleDeletePlayer(player.id)}/>
+              </div>
             </td>
 
             <td>

@@ -1,49 +1,58 @@
+$backgroundGrey: #eaeff7;
+$inputTextColor: rgb(109, 108, 108);
+
 .playersTable {
+  display: table;
   align-self: center;
   min-width: 600px;
   border-collapse: collapse;
-  display: table;
 
-  //  td {
-  //   border: 1px solid rgba(128, 128, 128, 0.37);
-  // }
   tbody tr:nth-child(even) {
-    background-color: #eaeff7; /* Чередующийся цвет фона рядов */
+    background-color: $backgroundGrey; /* Чередующийся цвет фона рядов */
   }
   tbody td {
     vertical-align: middle;
+    min-width: 35px;
+    padding: 10px;
+  }
+
+  .none {
+    display: none;
+  }
+
+  .nameCol, .rankCol {
+    cursor: pointer;
+    &:hover {
+      background-color: $backgroundGrey;
+    }
+  }
+
+  .nameCol {
+    text-align: start;
     padding: 10px;
   }
 
   .name {
-    width: 150px;
+    min-width: 150px;
   }
 
-  .inputName {
-    max-width: 125px;
+  .inputName, .inputRank {
     margin: 0;
     border: none;
     border-bottom: 1px solid;
-    color: rgb(109, 108, 108);
+    color: $inputTextColor;
     font-style: italic;
     background-color: transparent;
 
     &:focus {
       outline: none;
     }
+  }
+  .inputName {
+    max-width: 125px;
   }
   .inputRank {
     max-width: 40px;
     text-align: center;
-    margin: 0;
-    border: none;
-    border-bottom: 1px solid;
-    color: rgb(109, 108, 108);
-    font-style: italic;
-    background-color: transparent;
-
-    &:focus {
-      outline: none;
-    }
   }
 }

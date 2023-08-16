@@ -12,7 +12,6 @@ import { FiCamera, FiRefreshCcw } from 'react-icons/fi'
 
 const Mixer: FC = () => {
   const initData = data.map((el) => ({ ...el, selected: false }));
-  console.log(initData)
   const [state, setState] = useState(initData);
   const [showResult, setShowResult] = useState(false)
   const [refresh, setRefresh] = useState(false)
